@@ -1,6 +1,5 @@
 
 class JLangCompiler:
-
     def __init__(self):
         pass
     

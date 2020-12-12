@@ -1,7 +1,6 @@
 from packages.parsing.JLangCompiler import JLangCompiler
 
 class JLangMake:
-
     def __init__(self):
         pass
 
