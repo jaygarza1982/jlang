@@ -1,4 +1,5 @@
 from packages.utils.Splitter import Splitter
+from packages.parsing.JLangLineEvaluator import JLangLineEvaluator
 
 class JLangFunctionParser:
     def __init__(self, asm_file):
@@ -8,9 +9,48 @@ class JLangFunctionParser:
         splitter = Splitter()
         lines = splitter.split(input_str)
 
-        for line in lines:
+        for i in range(len(lines)):
+            line = lines[i]
+
             if line.strip() != '':
                 # print(line)
                 current_line = line.strip()
+                func_name = ''
                 if current_line.startswith('func'):
-                    print(current_line)
+                    # Get our function name
+                    func_name = current_line.strip()
+                    func_name = func_name[len('func'):].strip()
+                    func_name = func_name.split('(')[0].strip()
+
+                    # Compile start of function in assembly
+                    self.asm_file.code += f'func_{func_name}_start:\n'
+                    self.asm_file.code += '\npush ebp\nmov ebp, esp\n\n'
+
+                    # print('func name', func_name)
+
+                    # Bracket loop
+                    # Loop until we find balanced brackets
+                    j = i
+                    brackets = 0
+                    while True:
+                        current_line = lines[j].strip()
+
+                        # print(current_line)
+
+                        # Balance brackets
+                        if current_line.endswith('{'):
+                            brackets += 1
+                        elif current_line.endswith('}'):
+                            brackets -= 1
+                        # If we are balanced, quit
+                        if brackets == 0:
+                            break
+
+                        # Evaluate each line
+                        evaluator = JLangLineEvaluator(self.asm_file)
+                        evaluator.evaluate(current_line)
+
+                        j += 1
+
+                    self.asm_file.code += '\nmov esp, ebp\npop ebp\nret\n\n'
+                    self.asm_file.code += f'func_{func_name}_end:\n'

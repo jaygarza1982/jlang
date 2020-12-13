@@ -23,4 +23,7 @@ class JLangCompiler:
         function_parser = JLangFunctionParser(asm_file)
         function_parser.parse(input_str)
 
+        # At top of code, jump to the main function
+        asm_file.code = 'jmp func_main_start\n\n' + asm_file.code
+
         return asm_file.compile()
