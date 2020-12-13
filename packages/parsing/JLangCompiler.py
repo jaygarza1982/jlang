@@ -1,3 +1,6 @@
+from packages.parsing.JLangGlobalParser import JLangGlobalParser
+from packages.parsing.JLangFunctionParser import JLangFunctionParser
+from packages.parsing.AsmFile import AsmFile
 
 class JLangCompiler:
     def __init__(self):
@@ -5,3 +8,19 @@ class JLangCompiler:
     
     def compile_jlang(self, source_file):
         print(f'Compiling from source file {source_file}')
+
+        source_file_open = open(source_file, 'r')
+        input_str = source_file_open.read()
+        source_file_open.close()
+
+        asm_file = AsmFile()
+
+        # Parse global variables
+        global_parser = JLangGlobalParser(asm_file)
+        global_parser.parse(input_str)
+
+        # Parse functions
+        function_parser = JLangFunctionParser(asm_file)
+        function_parser.parse(input_str)
+
+        return asm_file.compile()

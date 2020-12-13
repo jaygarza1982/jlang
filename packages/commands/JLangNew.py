@@ -5,7 +5,14 @@ class JLangNew:
         pass
 
     def make_new(self, project_name):
+        # Make a new folder for the new project
         os.mkdir(f'projects/{project_name}')
+
+        template_file = open('project-templates/hello-world.jlang', 'r')
         main_file = open(f'projects/{project_name}/main.jlang', 'w')
-        main_file.write('\nfunc main() {\n\tlet hello_str = "Hello, World!";\n\tprint(hello_str)\n}\n')
+
+        # Copy contents of the template into the new project folder
+        main_file.write(template_file.read())
+        
+        template_file.close()
         main_file.close()

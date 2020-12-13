@@ -5,4 +5,9 @@ class JLangMake:
         pass
 
     def make(self, project_name):
-        print(f'made {project_name}')
+        print(f'Parsing {project_name}')
+
+        compiler = JLangCompiler()
+        compiled = compiler.compile_jlang(f'projects/{project_name}/main.jlang')
+
+        print(compiled)

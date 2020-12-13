@@ -3,5 +3,5 @@ class JLangLetParser:
     def __init__(self):
         pass
 
-    def parse(input_str):
+    def parse(self, input_str):
         pass
