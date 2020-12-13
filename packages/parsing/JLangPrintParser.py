@@ -14,5 +14,5 @@ class JLangPrintParser:
         self.asm_file.code += '\tmov eax, 4\n'
         self.asm_file.code += '\tmov ebx, 1\n'
         self.asm_file.code += f'\tmov ecx, {to_print}\n'
-        self.asm_file.code += f'\tmov edx, 10\n'
+        self.asm_file.code += f'\tmov edx, 32\n'
         self.asm_file.code += '\tint 0x80\n'

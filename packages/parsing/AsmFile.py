@@ -11,4 +11,4 @@ class AsmFile:
         pass
 
     def compile(self):
-        return f'segment .data\n{self.data}\n\nsegment .bss\n{self.bss}\n\n{self.code}\n'
+        return f'segment .data\n{self.data}\n\nsegment .bss\n{self.bss}\n\nsegment .text\n\tglobal main\n\n{self.code}\n'
