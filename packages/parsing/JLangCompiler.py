@@ -1,17 +1,29 @@
 from packages.parsing.JLangGlobalParser import JLangGlobalParser
 from packages.parsing.JLangFunctionParser import JLangFunctionParser
+from packages.parsing.JLangAsmModifier import JLangAsmModifier
+from packages.parsing.JLangIncludeModifier import JLangIncludeModifier
 from packages.parsing.AsmFile import AsmFile
 
 class JLangCompiler:
     def __init__(self):
         pass
     
-    def compile_jlang(self, source_file):
+    def compile_jlang(self, project_dir, source_file):
         print(f'Compiling from source file {source_file}')
 
         source_file_open = open(source_file, 'r')
         input_str = source_file_open.read()
         source_file_open.close()
+
+        # Include files within our initial file string
+        include_modifier = JLangIncludeModifier()
+        input_str = include_modifier.modify(project_dir, input_str)
+
+        # Add pure assembly code to our compiled asm file
+        # print(input_str)
+        asm_parser = JLangAsmModifier()
+        input_str = asm_parser.modify(input_str)
+        print(input_str)
 
         asm_file = AsmFile()
 

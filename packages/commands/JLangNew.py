@@ -8,7 +8,7 @@ class JLangNew:
         # Make a new folder for the new project
         os.mkdir(f'projects/{project_name}')
 
-        template_file = open('project-templates/hello-world.jlang', 'r')
+        template_file = open('jlang/hello-world.jlang', 'r')
         main_file = open(f'projects/{project_name}/main.jlang', 'w')
 
         # Copy contents of the template into the new project folder

@@ -1,3 +1,4 @@
+include:print.jlang
 
 func main() {
 	global byte hello_str = "Hello, World!"

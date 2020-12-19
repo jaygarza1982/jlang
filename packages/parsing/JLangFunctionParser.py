@@ -22,6 +22,9 @@ class JLangFunctionParser:
                     func_name = func_name[len('func'):].strip()
                     func_name = func_name.split('(')[0].strip()
 
+                    # Add a function name to the set of functions
+                    self.asm_file.add_function(func_name)
+
                     # Compile start of function in assembly
                     self.asm_file.code += f'{func_name}:\n'
                     self.asm_file.code += '\npush ebp\nmov ebp, esp\n\n'

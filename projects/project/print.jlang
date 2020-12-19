@@ -1,0 +1,10 @@
+
+func print() {
+    ASM {
+        mov eax, 4
+        mov ebx, 1
+        mov ecx, DWORD [ebp + 8]
+        mov edx, 32
+        int 0x80
+    }
+}
