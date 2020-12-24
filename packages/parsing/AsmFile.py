@@ -7,11 +7,18 @@ class AsmFile:
 
         # Store the function names defined within our assembly
         self._function_names = set()
+        # Store globals that are in the assembly file
+        self._globals = dict()
 
     # TODO: Parse global, then add to the .data segment of the assembly
     # Store the global length in a map in this asm file to query later when accessing the variable
-    def add_global(self, type, name, data):
-        pass
+    def add_global(self, name, data):
+        if name in self._globals:
+            print(f'Variable redefined error! Variable "{name}" already defined! Quitting.')
+            exit(-3)
+
+        global_length = data.replace('"', '')
+        self._globals[name] = {'data': data, 'length': len(data)}
 
     def add_function(self, name):
         # Stop compiling if a function name is already in the function names

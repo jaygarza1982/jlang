@@ -15,4 +15,4 @@ class JLangLineEvaluator:
             func_len = len(f'{possible_func}(')
             func_arg = line[func_len:len(line)-1]
             self.asm_file.code += f'push {func_arg}\n'
-            self.asm_file.code += f'call {possible_func}'
+            self.asm_file.code += f'call {possible_func}\n'

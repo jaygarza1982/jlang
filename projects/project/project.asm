@@ -1,5 +1,6 @@
 segment .data
 	hello_str db "Hello, World!"
+	hello_new_line db "Hello",10
 
 
 segment .bss
@@ -33,6 +34,9 @@ mov ebp, esp
 
 push hello_str
 call print
+push hello_new_line
+call print
+
 mov esp, ebp
 pop ebp
 ret
