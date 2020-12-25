@@ -2,8 +2,8 @@ include:print.jlang
 
 func main() {
 	global byte hello_str = "Hello, World!"
-	print(hello_str)
+	print(hello_str, 32)
 
 	global byte hello_new_line = "Hello",10
-	print(hello_new_line)
+	print(hello_new_line, 6)
 }
