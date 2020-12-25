@@ -1,5 +1,5 @@
 ### About
-Jlang is functional programming language that is compiled to 32 bit x86 Linux machine code and assembly
+Jlang is functional programming language that is compiled to 32 bit x86 Linux machine code executable
 
 ### Getting started
 
@@ -12,4 +12,5 @@ $ python3 jlang.py make project && ./projects/project/project
 - Raw x86 assembly code injection
 - Printing
 - Global variable declaration
+- Assembly output file
 - More to come!
