@@ -12,5 +12,7 @@ $ python3 jlang.py make project && ./projects/project/project
 - Raw x86 assembly code injection
 - Printing
 - Global variable declaration
+- Function declaration
+- Function calling
 - Assembly output file
 - More to come!
