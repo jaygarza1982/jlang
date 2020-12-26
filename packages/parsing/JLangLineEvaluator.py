@@ -22,4 +22,4 @@ class JLangLineEvaluator:
             # Call our function
             self.asm_file.code += f'call {possible_func}\n'
             # Clean the stack
-            self.asm_file.code += f'add esp, {len(func_args_list)}\n'
+            self.asm_file.code += f'add esp, {len(func_args_list) * 4}\n'

@@ -1,4 +1,4 @@
-from packages.utils.IntegerParser import IntegerParser
+from packages.utils.GlobalLengthExtractor import GlobalLengthExtractor
 
 class AsmFile:
     def __init__(self):
@@ -11,28 +11,25 @@ class AsmFile:
         # Store globals that are in the assembly file
         self._globals = dict()
 
-    # TODO: Parse global, then add to the .data segment of the assembly
-    # Store the global length in a map in this asm file to query later when accessing the variable
     def add_global(self, name, data):
         if name in self._globals:
-            print(f'Variable redefined error! Variable "{name}" already defined! Quitting.')
+            print(f'Variable redefined error! Variable "{name}" already defined! Aborting.')
             exit(-3)
-
-        # global_length = data.replace('"', '')
-        global_length = 0
-        # Split data by commas
-        data_comma_split = data.split(',')
-        int_parser = IntegerParser()
-        # Loop through each comma separated item
-        for data_item in data_comma_split:
-            if int_parser.is_int(data_item):
-                global_length += 1
-            else:
-                # Item is not an int, strip quotes and get length of string
-                string = data_item.replace('"', '')
-                global_length += len(string)
+        
+        global_length_ext = GlobalLengthExtractor()
+        global_length = global_length_ext.get_length(data)
 
         self._globals[name] = {'data': data, 'length': global_length}
+
+    def get_global(self, name):
+        if name not in self._globals:
+            print(f'Global {name} does not exist! Aborting!.')
+            exit(-4)
+        
+        return self._globals[name]
+
+    def get_global_names(self):
+        return self._globals.keys()
 
     def add_function(self, name):
         # Stop compiling if a function name is already in the function names

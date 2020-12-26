@@ -2,6 +2,7 @@ from packages.parsing.JLangGlobalParser import JLangGlobalParser
 from packages.parsing.JLangFunctionParser import JLangFunctionParser
 from packages.parsing.JLangAsmModifier import JLangAsmModifier
 from packages.parsing.JLangIncludeModifier import JLangIncludeModifier
+from packages.parsing.JLangPreprocessors import JLangGlobalLen
 from packages.parsing.AsmFile import AsmFile
 
 class JLangCompiler:
@@ -30,6 +31,10 @@ class JLangCompiler:
         # Parse global variables
         global_parser = JLangGlobalParser(asm_file)
         global_parser.parse(input_str)
+
+        # Preprocess global lengths after adding them to the asm file
+        global_length_processor = JLangGlobalLen(asm_file)
+        input_str = global_length_processor.preprocess(input_str)
 
         # Parse functions
         function_parser = JLangFunctionParser(asm_file)

@@ -1,6 +1,6 @@
 segment .data
-	hello_str db "Hello, World!"
-	hello_new_line db "Hello",10
+	hello_new_line db "Hello, World!",10
+	jlang_message db "I think JLang is pretty neat!",10
 
 
 segment .bss
@@ -32,14 +32,14 @@ main:
 push ebp
 mov ebp, esp
 
-push 32
-push hello_str
-call print
-add esp, 2
-push 6
+push 14
 push hello_new_line
 call print
-add esp, 2
+add esp, 8
+push 30
+push jlang_message
+call print
+add esp, 8
 
 mov esp, ebp
 pop ebp
