@@ -38,5 +38,8 @@ class JLangGlobalParser:
                     # Get variable and assignment
                     current_split = re.split('\s?=\s?', current_line)
 
+                    # Add global to assembly file globals
+                    self.asm_file.add_global(current_split[0], current_split[1])
+
                     # Append to the assembly
                     self.asm_file.data += f'\t{current_split[0]} {data_type} {current_split[1]}\n'
